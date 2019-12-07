@@ -1,0 +1,13 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+.wrapper {
+  max-width: 85rem;
+  margin: 0 auto;
+  padding: 1em 2em;
+}
+
+h1 {
+  color: blue;
+}

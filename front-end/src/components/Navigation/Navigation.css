@@ -1,0 +1,27 @@
+.site-nav ul {
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.site-nav li {
+    list-style: none outside;
+    margin: 0 0.5em;
+}
+
+.site-nav li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+    color: #FFF;
+    background-color: #E01F37;
+    border-radius: 0.3em;
+    padding: 0.5em 0.2em;
+}
+
+.site-nav li a:hover {
+    background-color: #FFF;
+    color: #E01F37;
+}

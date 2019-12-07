@@ -1,0 +1,115 @@
+.page-title {
+    position: relative;
+    display: inline-block;
+}
+
+.page-title::before {
+    display: block;
+    content: '';
+    background: url(../../images/christmasHat.png) left;
+    background-size: cover;
+    width: 1em;
+    height: 0.8em;
+    position: absolute;
+    top: -5px;
+    left: -17px;
+    transform: rotate(-8deg);
+}
+
+form {
+    padding-top: 10vh;
+    padding-bottom: 17vh;
+    text-align: center;
+    color: #234465;
+    background: #995aff;
+}
+
+label, input {
+    display: block;
+    color: white;
+    margin: 0 auto;
+}
+
+form button {
+    margin-top: 2%;
+    padding: 0.5%;
+    background-color: white;
+    color: #234465;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+form h1 {
+    font-size: 40px;
+    text-decoration: underline;
+    margin-bottom: 2%;
+    color: #ffa000;
+}
+
+form input {
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 0.2%;
+    width: 15%;
+    color: #234465;
+}
+
+form select, option {
+    color: #234465;
+}
+
+form select option {
+    font-size: 18px;
+}
+
+form p {
+    text-align: left;
+    width: 15%;
+    margin: 0 auto;
+    margin-top: 1%;
+    text-decoration: underline;
+    font-weight: bold;
+    color: #ffa000;
+}
+
+form hr {
+    width: 15%;
+    margin: 0 auto;
+    margin-top: 2%;
+    color: white;
+}
+
+form div.form-control {
+    width: 20%;
+    margin: 0 auto;
+    margin-bottom: 1%;
+    display: block;
+}
+
+form div.form-control label {
+    float: left;
+    width: 30%;
+}
+
+form div.form-control input, select {
+    width: 68%;
+}
+
+form div.form-control #date, #total, #vault {
+    width: 33%;
+    text-align: left;
+}
+
+form div.form-control #date {
+    margin: 0;
+}
+
+form div.form-control #total, #vault {
+    display: inline-block;
+}
