@@ -1,6 +1,9 @@
-.body {
-    min-height: 25rem;
-    background: linear-gradient(to bottom, rgba(230, 173, 173, 0.1), rgba(243, 89, 89, 0.2)), url('../../images/christmasTree.jpg');
-    background-position: center center;
-    background-size: cover;
+.login-page {
+    background: rgba(35, 94, 111, 0.2);
+}
+
+.login-form {
+    max-width: 35em;
+    margin: 0 auto;
+    padding: 3.6em 0;
 }
