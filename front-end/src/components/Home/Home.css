@@ -4,10 +4,3 @@
     background-position: center center;
     background-size: cover;
 }
-
-.xmas {
-    width: 100px;
-    height: 50px;
-    border: 10px solid transparent;
-    border-image: url('https://mpng.pngfly.com/20190613/erl/kisspng-clip-art-santa-claus-holiday-christmas-day-christm-5d021879324a52.037568701560418425206.jpg') 30 round;
-}
