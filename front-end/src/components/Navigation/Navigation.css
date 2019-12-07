@@ -25,3 +25,8 @@
     background-color: #FFF;
     color: #E01F37;
 }
+
+/* Transitions */
+.site-nav li a {
+    transition: background-color 0.1s ease-in;
+}
