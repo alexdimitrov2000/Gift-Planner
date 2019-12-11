@@ -2,7 +2,7 @@ import React from 'react';
 import './Lights.css'
 
 const Lights = () => {
-    return <ul class="lightrope">
+    return <ul className="lightrope">
     <li></li>
     <li></li>
     <li></li>

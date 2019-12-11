@@ -1,40 +1,113 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import './Register.css';
-import '../shared/styles/loginAndRegister.css'
-import cloudinary from '../../cloudinary';
+import * as yup from 'yup'
 
-const Register = () => {
-    return <div className="register-page">
-        <div className="register-form">
-            <form action="/register" method="POST">
-                <h1 className="page-title">Register</h1>
+import '../shared/styles/loginAndRegister.css';
+import cloudinaryData from '../../cloudinaryDataConstants';
+import withForm from '../shared/hocs/withForm';
+import userService from '../../services/user-service';
 
-                <div className="form-control required">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" name="username" id="username" />
-                </div>
 
-                <div className="form-control required">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password" />
-                </div>
-                
-                <div className="form-control required">
-                    <label htmlFor="confirm-password">Confirm Password</label>
-                    <input type="password" name="confirm-password" id="confirm-password" />
-                </div>
-                
-                <div className="form-control file">
-                    <label>Profile picture</label>
-                    <button type="button" id="upload_widget" onClick={() => cloudinary.open()} className="cloudinary-button">Upload files</button>
-                </div>
+class Register extends React.Component {
+    constructor(props) {
+        super(props);
 
-                <div className="submit-button">
-                    <button type="submit">Register</button>
-                </div>
-            </form>
-        </div>
-    </div>;
+        this.state = {
+            cloudWidget: cloudinary.createUploadWidget({
+                cloudName: cloudinaryData.cloudName,
+                apiKey: cloudinaryData.apiKey,
+                uploadPreset: cloudinaryData.uploadPreset
+            }, (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log('Done! Here is the image info: ', result.info);
+                    
+                    this.props.setProfilePicUrl(result.info.url);
+                }
+            }),
+            isImgUploaded: false
+        }
+    }
+
+    usernameOnChangeHandler = this.props.controlChangeHandlerFactory('username');
+    passwordOnChangeHandler = this.props.controlChangeHandlerFactory('password');
+    confirmPasswordOnChangeHandler = this.props.controlChangeHandlerFactory('confirmPassword');
+    
+    uploadImage = () => {
+        this.state.cloudWidget.open();
+
+        this.setState({ isImgUploaded: true });
+    }
+
+    submitHandler = (event) => {
+        event.preventDefault();
+
+        this.props.runValidations()
+        .then(formData => console.log(formData))
+        .catch(err => console.error(err));
+
+        const errors = this.props.getFormErrors();
+        if (!!errors) { return; }
+
+        const data = this.props.getFormState();
+        userService.register(data).then(() => {
+            this.props.history.push('/login');
+        });
+    }
+
+    render() {
+        const usernameErr = this.props.getFirstFieldError('username');
+        const passwordErr = this.props.getFirstFieldError('password');
+        const confirmPassErr = this.props.getFirstFieldError('confirmPassword');
+
+        return <div className="register-page">
+            <div className="register-form">
+                <form>
+                    <h1 className="page-title">Register</h1>
+
+                    <div className="form-control required">
+                        <label htmlFor="username">Username</label>
+                        <input type="text" name="username" id="username" onChange={this.usernameOnChangeHandler} />
+                        {usernameErr && <p className="error">{usernameErr}</p>}
+                    </div>
+
+                    <div className="form-control required">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" name="password" id="password" onChange={this.passwordOnChangeHandler} />
+                        {passwordErr && <p className="error">{passwordErr}</p>}
+                    </div>
+
+                    <div className="form-control required">
+                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <input type="password" name="confirmPassword" id="confirmPassword" onChange={this.confirmPasswordOnChangeHandler} />
+                        {confirmPassErr && <p className="error">{confirmPassErr}</p>}
+                    </div>
+
+                    <div className="form-control file">
+                        <label>Profile picture</label>
+                        <button type="button" id="upload_widget" disabled={this.state.isImgUploaded} onClick={this.uploadImage} className="cloudinary-button">Upload files</button>
+                    </div>
+
+                    <div className="submit-button">
+                        <button type="submit" onClick={this.submitHandler}>Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>;
+    }
+
+}
+const initialFormState = {
+    username: '',
+    password: '',
+    confirmPassword: '',
+    profilePictureUrl: ''
 }
 
-export default Register;
+const schema = yup.object({
+    username: yup.string().required('Username is required.').min(4, 'Username must be more than 4 chars'),
+    password: yup.string().required('Password is required.').min(4, 'Password must be more than 4 chars'),
+    confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords do not match.').required('Confirm password is required.').min(4, 'Confirm password must be more than 4 chars')
+});
+
+export default withForm(Register, initialFormState, schema);

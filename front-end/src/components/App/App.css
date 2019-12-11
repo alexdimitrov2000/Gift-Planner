@@ -11,3 +11,9 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   color: blue;
 }
+
+.loader {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 5em 0 25em 0;
+}

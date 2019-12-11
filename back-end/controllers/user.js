@@ -11,15 +11,17 @@ module.exports = {
 
     post: {
         register: (req, res, next) => {
-            const { username, password } = req.body;
-            let usersCnt = 0;
-            User.find().then(users => usersCnt = users.length);
+            const { username, password, profilePictureUrl } = req.body;
+
             const user = {
                 username,
-                password,
-                isAdmin: (usersCnt == 0)
+                password
             }
-            
+
+            if (profilePictureUrl) {
+                user.profilePictureUrl = profilePictureUrl;
+            }
+
             models.User.create(user)
                 .then((createdUser) => res.send(createdUser))
                 .catch(next)
