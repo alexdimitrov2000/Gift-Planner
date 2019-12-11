@@ -1,9 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
-import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ isLogged }) => {
     return <header className="site-header">
         <div className="wrapper">
             <div className="site-branding">
@@ -12,7 +12,7 @@ const Header = () => {
                 </Link>
                 
             </div>
-            <Navigation />
+            <Navigation isLogged={isLogged} />
         </div>
     </header>;
 }
