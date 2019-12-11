@@ -3,4 +3,19 @@
     background: linear-gradient(to bottom, rgba(230, 173, 173, 0.1), rgba(243, 89, 89, 0.2)), url('../../images/christmasTree.jpg');
     background-position: center center;
     background-size: cover;
+    font-family: 'Mountains of Christmas', cursive;
+    padding: 7em 2em;
+}
+
+.welcome-banner p {
+    text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.7);
+}
+
+.welcome-banner .main-greet {
+    font-size: 4.5em;
+    padding-bottom: 0.5em;
+}
+
+.welcome-banner .secondary-greet {
+    font-size: 3em;
 }

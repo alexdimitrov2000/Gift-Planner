@@ -8,7 +8,7 @@ const Header = ({ isLogged }) => {
         <div className="wrapper">
             <div className="site-branding">
                 <Link to="/">
-                    <p className="site-title">Site Title</p>
+                    <p className="site-title">Xmas Gifts</p>
                 </Link>
                 
             </div>
