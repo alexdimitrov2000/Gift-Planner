@@ -3,7 +3,7 @@ import React from 'react';
 import './Register.css';
 import * as yup from 'yup'
 
-import '../shared/styles/loginAndRegister.css';
+import '../shared/styles/formStyles.css';
 import cloudinaryData from '../../cloudinaryDataConstants';
 import withForm from '../shared/hocs/withForm';
 import userService from '../../services/user-service';
@@ -25,7 +25,8 @@ class Register extends React.Component {
                     this.props.setProfilePicUrl(result.info.url);
                 }
             }),
-            isImgUploaded: false
+            isImgUploaded: false,
+            serverError: null
         }
     }
 
@@ -52,6 +53,8 @@ class Register extends React.Component {
         const data = this.props.getFormState();
         userService.register(data).then(() => {
             this.props.history.push('/login');
+        }).catch(err => {
+            this.setState({ serverError: err });
         });
     }
 
@@ -59,6 +62,7 @@ class Register extends React.Component {
         const usernameErr = this.props.getFirstFieldError('username');
         const passwordErr = this.props.getFirstFieldError('password');
         const confirmPassErr = this.props.getFirstFieldError('confirmPassword');
+        const { serverError } = this.state;
 
         return <div className="register-page">
             <div className="register-form">
@@ -66,6 +70,7 @@ class Register extends React.Component {
                     <h1 className="page-title">Register</h1>
 
                     <div className="form-control required">
+                        {serverError && <p className="error">{serverError}</p>}
                         <label htmlFor="username">Username</label>
                         <input type="text" name="username" id="username" onChange={this.usernameOnChangeHandler} />
                         {usernameErr && <p className="error">{usernameErr}</p>}
@@ -85,7 +90,7 @@ class Register extends React.Component {
 
                     <div className="form-control file">
                         <label>Profile picture</label>
-                        <button type="button" id="upload_widget" disabled={this.state.isImgUploaded} onClick={this.uploadImage} className="cloudinary-button">Upload files</button>
+                        <button type="button" id="upload_widget" disabled={this.state.isImgUploaded} onClick={this.uploadImage} className="cloudinary-button">Upload file</button>
                     </div>
 
                     <div className="submit-button">

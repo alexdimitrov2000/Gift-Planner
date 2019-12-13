@@ -3,35 +3,3 @@
     margin: 0 auto;
     padding: 2.1em 0;
 }
-
-.form-control.required label {
-    position: relative;
-}
-
-.form-control.required label::before {
-    display: inline-block;
-    content: '*';
-    color: red;
-    position: absolute;
-    top: 0;
-    left: -10px;
-}
-
-.form-control.file {
-    align-items: center;
-    margin-top: 1.4em;
-}
-
-.form-control.file .cloudinary-button {
-    background-color: #34A65F;
-    color: #FFF;
-    border-radius: 6px;
-    line-height: unset;
-    border: none;
-    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.45);
-    cursor: pointer;
-}
-
-.form-control.file .cloudinary-button:hover {
-    text-decoration: underline;
-}

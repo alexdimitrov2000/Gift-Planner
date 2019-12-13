@@ -6,7 +6,7 @@ const userService = {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json());
+        }).then(res => res.text().then(text => res.status === 200 ? text : Promise.reject(text)));
     },
 
     login: function (data) {
