@@ -104,7 +104,7 @@ const initialFormState = {
     profilePictureUrl: ''
 }
 
-const schema = yup.object({
+const schema = yup.object().shape({
     username: yup.string().required('Username is required.').min(4, 'Username must be more than 4 chars'),
     password: yup.string().required('Password is required.').min(4, 'Password must be more than 4 chars'),
     confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords do not match.').required('Confirm password is required.').min(4, 'Confirm password must be more than 4 chars')

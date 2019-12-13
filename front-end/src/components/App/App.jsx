@@ -30,7 +30,7 @@ class App extends React.Component {
   }
 
   login = (history, data) => {
-    userService.login(data).then(() => {
+    return userService.login(data).then(() => {
       this.setState({ isLogged: true });
       history.push('/');
     })
