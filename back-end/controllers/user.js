@@ -13,6 +13,14 @@ module.exports = {
         register: (req, res, next) => {
             const { username, password, profilePictureUrl } = req.body;
 
+            models.User.findOne({ username })
+                .then((user) => {
+                    if (user) {
+                        res.status(401).send('Username is already taken');
+                        return;
+                    }
+                });
+
             const user = {
                 username,
                 password
@@ -30,10 +38,10 @@ module.exports = {
         login: (req, res, next) => {
             const { username, password } = req.body;
             models.User.findOne({ username })
-                .then((user) => Promise.all([user, user.matchPassword(password)]))
+                .then((user) => !!user ? Promise.all([user, user.matchPassword(password)]) : [null, false])
                 .then(([user, match]) => {
                     if (!match) {
-                        res.status(401).send('Invalid password');
+                        res.status(401).send('Invalid credentials');
                         return;
                     }
 
