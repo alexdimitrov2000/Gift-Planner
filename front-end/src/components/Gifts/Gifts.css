@@ -1,0 +1,22 @@
+.gifts-section {
+    padding: 3em 0;
+    padding-top: 1.2em;
+}
+
+.gifts-section header > h2 {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.gifts {
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 5em;
+    align-items: start;
+}
+
+.gifts-section .loader {
+    padding-bottom: 10em;
+}

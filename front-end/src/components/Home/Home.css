@@ -7,6 +7,10 @@
     padding: 7em 2em;
 }
 
+.welcome-banner .wrapper {
+    padding: 1em 2em;
+}
+
 .welcome-banner p {
     text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.7);
 }

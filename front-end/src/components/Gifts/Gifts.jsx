@@ -1,30 +1,31 @@
 import React from 'react'
 import './Gifts.css'
 import PropTypes from 'prop-types';
+import Loader from 'react-loading';
 
 import Gift from './Gift/Gift'
 import giftService from '../../services/gift-service';
 
-class Gifts extends React.Component {
-    state = {
-        gifts: null
-    };
+const Gifts = ({ limit }) => {
+    const [gifts, setGifts] = React.useState(null);
 
-    componentDidMount() {
-        giftService.load(null, this.props.limit).then(gifts => {
-            this.setState({ gifts });
+    React.useEffect(() => {
+        giftService.load(null, limit).then(gifts => {
+            setGifts(gifts);
         });
-    }
+    }, [limit]);
 
-    render() {
-        const { gifts } = this.state;
+    return <div className="gifts-section">
+        <header>
+            <h1 className="page-title">Top 3 Gifts</h1>
+        </header>
 
-        return <div>
+        <div className="wrapper">
             {gifts ?
-                <div className="gifts">{gifts.map(gift => <Gift key={gift._id} id={gift._id} name={gift.name} imageUrl={gift.imageUrl}>{gift.description}</Gift>)}</div>
-                : <div>Loading...</div>}
+                <ul className="gifts">{gifts.map(gift => <Gift key={gift._id} id={gift._id} name={gift.name} imageUrl={gift.imageUrl}>{gift.description}</Gift>)}</ul>
+                : <Loader className="loader" type="spinningBubbles" color="#0F8A5F" width="7rem" height="7rem" />}
         </div>
-    }
+    </div>
 }
 
 Gifts.propTypes = {
