@@ -1,0 +1,21 @@
+.create-gift-page {
+    padding: 2em 0;
+}
+
+.create-gift-page .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-gift-page .create-gift-form {
+    flex-basis: 50%;
+}
+
+.create-gift-page .create-gift-form textarea {
+    resize: none;
+}
+
+form h1::before {
+    left: -12px;
+}

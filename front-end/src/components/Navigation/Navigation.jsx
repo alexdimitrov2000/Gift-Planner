@@ -6,6 +6,7 @@ function Navigation({ isLogged }) {
     return <nav className="site-nav">
         {isLogged ?
             <ul>
+                <li><Link to="/gifts/create">Create Gift</Link></li>
                 <li><Link to="/profile">Profile</Link></li>
                 <li><Link to="/logout">Logout</Link></li>
             </ul>
