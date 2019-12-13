@@ -49,7 +49,21 @@ form div.form-control label {
     margin-bottom: 0.2em;
 }
 
-form div.form-control input {
+.form-control.required label {
+    position: relative;
+}
+
+.form-control.required label::before {
+    display: inline-block;
+    content: '*';
+    color: red;
+    position: absolute;
+    top: 0;
+    left: -10px;
+}
+
+form div.form-control input,
+form div.form-control textarea {
     flex-basis: 100%;
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.45);
     border: 1px solid white;
@@ -60,7 +74,9 @@ form div.form-control input {
 }
 
 form div.form-control input:hover,
-form div.form-control input:focus {
+form div.form-control input:focus,
+form div.form-control textarea:hover,
+form div.form-control textarea:focus {
     border: 1px solid #0F8A5F;
 }
 
@@ -69,6 +85,34 @@ form .form-control .error {
     text-shadow: 1px 1px 2px rgba(255, 0, 0, 0.3);
     font-size: 0.8em;
     padding-bottom: 0;
+    flex-basis: 100%;
+}
+
+.form-control.file {
+    align-items: center;
+    margin-top: 1.4em;
+}
+
+.form-control.file .cloudinary-button {
+    color: #FFF;
+    border-radius: 6px;
+    line-height: unset;
+    border: none;
+    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+}
+
+.form-control.file .cloudinary-button:hover {
+    text-decoration: underline;
+}
+
+.form-control.file .cloudinary-button:disabled {
+    background-color: #22bb33;
+    cursor: not-allowed;
+}
+
+.form-control.file .cloudinary-button:disabled:hover {
+    text-decoration: none;
 }
 
 form .submit-button button {
