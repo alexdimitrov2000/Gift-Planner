@@ -3,67 +3,65 @@ import './Login.css';
 import * as yup from 'yup';
 
 import '../shared/styles/loginAndRegister.css';
-import withForm from '../shared/hocs/withForm';
+import { useFormControl, getSchemaValdationsRunner } from '../shared/customHooks/useForm';
 
-class Login extends React.Component {
-    usernameOnChangeHandler = this.props.controlChangeHandlerFactory('username');
-    passwordOnChangeHandler = this.props.controlChangeHandlerFactory('password');
-
-    submitHandler = (event) => {
-        event.preventDefault();
-
-        this.props.runValidations()
-            .then(formData => console.log(formData))
-            .catch(err => {
-                console.error(err);
-                return;
-            });
-
-        const errors = this.props.getFormErrors();
-        if (!!errors) { return; }
-
-        const data = this.props.getFormState();
-        this.props.login(this.props.history, data);
-    }
-
-    render() {
-        const usernameErr = this.props.getFirstFieldError('username');
-        const passwordErr = this.props.getFirstFieldError('password');
-
-        return <div className="login-page">
-            <div className="login-form">
-                <form>
-                    <h1 className="page-title">Login</h1>
-
-                    <div className="form-control">
-                        <label htmlFor="username">Username</label>
-                        <input type="text" name="username" id="username" onChange={this.usernameOnChangeHandler} />
-                        {usernameErr && <p className="error">{usernameErr}</p>}
-                    </div>
-
-                    <div className="form-control">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="password" onChange={this.passwordOnChangeHandler} />
-                        {passwordErr && <p className="error">{passwordErr}</p>}
-                    </div>
-
-                    <div className="submit-button">
-                        <button type="submit" onClick={this.submitHandler}>Login</button>
-                    </div>
-                </form>
-            </div>
-        </div>;
-    }
-}
-
-const initialFormState = {
-    username: '',
-    password: ''
-}
-
-const schema = yup.object({
+const fieldsValidations = {
     username: yup.string().required('Username is required'),
     password: yup.string().required('Password is required')
-});
+};
 
-export default withForm(Login, initialFormState, schema);
+const schema = yup.object().shape(fieldsValidations);
+
+const validationsRunner = getSchemaValdationsRunner(schema);
+
+const Login = ({ login, history }) => {
+    const usernameFormControl = useFormControl('');
+    const passwordFormControl = useFormControl('');
+    const [credentialsError, setCredentialsError] = React.useState(null);
+
+    const submitHandler = React.useCallback((e) => {
+        e.preventDefault();
+        
+        usernameFormControl.setErrors(undefined);
+        passwordFormControl.setErrors(undefined);
+    
+        validationsRunner({
+            username: usernameFormControl.value,
+            password: passwordFormControl.value
+        }).then((data) => {
+            login(history, data).catch(error => {
+                setCredentialsError(error);
+            });
+        }).catch(errors => {
+            if (errors.username) { usernameFormControl.setErrors(errors.username); }
+            if (errors.password) { passwordFormControl.setErrors(errors.password); }
+        });
+    }, [usernameFormControl, passwordFormControl, setCredentialsError, login, history]);
+
+    return <div className="login-page">
+        <div className="login-form">
+            <form>
+                <h1 className="page-title">Login</h1>
+
+                <div className="form-control">
+                    <label htmlFor="username">Username</label>
+                    <input type="text" name="username" id="username" onChange={usernameFormControl.changeHandler} />
+                    {usernameFormControl.errors && <p className="error">{usernameFormControl.errors[0]}</p>}
+                </div>
+
+                <div className="form-control">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" name="password" id="password" onChange={passwordFormControl.changeHandler} />
+                    {passwordFormControl.errors && <p className="error">{passwordFormControl.errors[0]}</p>}
+                    {credentialsError && <p className="error">{credentialsError}</p>}
+                </div>
+
+                <div className="submit-button">
+                    <button type="submit" onClick={submitHandler}>Login</button>
+                </div>
+            </form>
+        </div>
+    </div>;
+}
+
+export default Login;

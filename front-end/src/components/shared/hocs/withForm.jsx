@@ -17,18 +17,20 @@ export default function withForm(Cmp, initialState, schema) {
                     this.setState(({ form }) => {
                         return { form: { ...form, [name]: newValue } };
                     });
+
+                    id = null;
                 }, 200);
             }
         }
 
         setProfilePicUrl = url => {
             this.setState(({ form }) => {
-                return { form: { ...form, 'profilePictureUrl': url }}
+                return { form: { ...form, 'profilePictureUrl': url } }
             })
         }
 
         getFormState = () => {
-          return this.state.form;
+            return this.state.form;
         };
 
         getFormErrors = () => {
@@ -41,19 +43,22 @@ export default function withForm(Cmp, initialState, schema) {
         }
 
         runValidations = () => {
-            return schema.validate(this.state.form, { abortEarly: false })
-                .then(() => {
-                    this.setState({ errors: undefined });
-                    return Promise.resolve(this.state.form);
-                })
-                .catch(err => {
-                    const errors = err.inner.reduce((acc, { path, message }) => {
-                        acc[path] = (acc[path] || []).concat(message);
-                        return acc;
-                    }, {});
-                    this.setState({ errors });
-                    return this.state.errors;
-                });
+            if (!schema) { return Promise.resolve(); }
+
+            const result = schema.validate(this.state.form, { abortEarly: false }).then(() => {
+                this.setState({ errors: undefined });
+                return this.state.form;
+            }).catch(err => {
+                const errors = err.inner.reduce((acc, { path, message }) => {
+                    acc[path] = (acc[path] || []).concat(message);
+                    return acc;
+                }, {});
+                this.setState({ errors });
+
+                return errors;
+            });
+
+            return result;
         }
 
         render() {

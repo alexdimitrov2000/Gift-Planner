@@ -1,9 +1,5 @@
-.login-page {
-    background: rgba(35, 94, 111, 0.2);
-}
-
 .login-form {
     max-width: 35em;
     margin: 0 auto;
-    padding: 3.6em 0;
+    padding: 4.6em 0;
 }
