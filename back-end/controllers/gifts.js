@@ -16,14 +16,16 @@ module.exports = {
             .catch(next);
     },
 
-    post: (req, res, next) => {
-        const { name, imageUrl, description } = req.body;
+    post: {
+        create: (req, res, next) => {
+            const { name, imageUrl, description } = req.body;
 
-        models.Gift.create({ name, imageUrl, description })
-            .then((createdGift) => {
-                res.send(createdGift);
-            })
-            .catch(next);
+            models.Gift.create({ name, imageUrl, description })
+                .then((createdGift) => {
+                    res.send(createdGift);
+                })
+                .catch(next);
+        }
     },
 
     put: {

@@ -4,7 +4,9 @@ const { auth } = require('../utils');
 
 router.get('/', controllers.gifts.get);
 
-router.post('/', auth(), controllers.gifts.post);
+// router.post('/', auth(), controllers.gifts.post);
+
+router.post('/create', auth(), controllers.gifts.post.create);
 
 router.put('/:id', auth(), controllers.gifts.put.addGiver);
 
