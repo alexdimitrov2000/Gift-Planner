@@ -1,0 +1,50 @@
+.media {
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+.media::before {
+    display: block;
+    content: '';
+    padding-top: 65.25%;
+}
+
+.media > a {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.media > a::before {
+    display: block;
+    content: '';
+    background: rgba(0,0,0,0.0);
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+}
+
+.media > a:hover {
+    cursor: pointer;
+}
+
+.media > a:hover img {
+    position: relative;
+}
+
+.media > a:hover img {
+    transform: scale(1.2);
+}
+
+.media img {
+    height: auto;
+    width: 100%;
+
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+}
+
+.media > a img {
+    transition: transform 0.2s ease-in;
+}
