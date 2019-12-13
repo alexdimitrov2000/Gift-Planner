@@ -1,0 +1,38 @@
+li.gift {
+    list-style: none outside;
+    background-color: #FFF;
+    grid-column-start: span 1;
+    border-radius: 0.3em;
+    box-shadow: 0 0 0.7em 0 rgba(0,0,0,0.5);
+    position: relative;
+    margin-top: 1em;
+}
+
+.gift-info {
+    display: block;
+    padding: 0 1.2em;
+    padding-top: 2.4em;
+    padding-bottom: 1.5em;
+    color: #000;
+    position: relative;
+}
+
+.gift-info::before {
+    display: block;
+    content: '';
+    background: url(../../../images/christmasRibbon.png) left;
+    background-size: cover;
+    width: 9em;
+    height: 4em;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.gift-info .gift-name {
+    display: block;
+    font-size: 1.4em;
+}
+

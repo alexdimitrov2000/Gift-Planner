@@ -1,13 +1,16 @@
 import React from 'react';
-import './Gift.css';
 import PropTypes from 'prop-types';
+import './Gift.css';
+import Image from '../Image/Image'
 
 const Gift = (props) => {
-    return <div className="gift">
-        <img src={props.imageUrl} alt={props.name} />
-        <h2>{props.name}</h2>
-        <p>{props.children}</p>
-    </div>
+    return <li className="gift">
+        <Image imageUrl={props.imageUrl} alt={props.name} />
+        <span className="gift-info">
+            <strong className="gift-name">{props.name}</strong>
+            <span className="gift-desc">{props.children}</span>
+        </span>
+    </li>
 }
 
 Gift.propTypes = {
