@@ -1,5 +1,18 @@
 .login-form {
     max-width: 35em;
     margin: 0 auto;
-    padding: 4.6em 0;
+    padding: 3.1em 0;
+}
+
+.login-form p {
+    padding-bottom: 0;
+    padding-top: 1.5em;
+}
+
+.login-form p a {
+    color: #0F8A5F;
+}
+
+.login-form p a:hover {
+    text-decoration: underline;
 }

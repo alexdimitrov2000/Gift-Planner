@@ -1,8 +1,9 @@
 import React from 'react';
 import './Login.css';
 import * as yup from 'yup';
+import { Link } from 'react-router-dom';
 
-import '../shared/styles/loginAndRegister.css';
+import '../shared/styles/formStyles.css';
 import { useFormControl, getSchemaValdationsRunner } from '../shared/customHooks/useForm';
 
 const fieldsValidations = {
@@ -59,6 +60,10 @@ const Login = ({ login, history }) => {
                 <div className="submit-button">
                     <button type="submit" onClick={submitHandler}>Login</button>
                 </div>
+
+                <p>
+                    Don't have an account? <Link to="/register">Register</Link> right now.
+                </p>
             </form>
         </div>
     </div>;
