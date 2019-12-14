@@ -3,10 +3,21 @@ const config = require('../config/config');
 const utils = require('../utils');
 
 module.exports = {
-    get: (req, res, next) => {
-        models.User.find()
-            .then((users) => res.send(users))
-            .catch(next)
+    get: {
+        getAll: (req, res, next) => {
+            models.User.find()
+                .then((users) => res.send(users))
+                .catch(next);
+        },
+
+        getOne: (req, res, next) => {
+            const username = req.params.username;
+            
+            models.User.findOne({ username }).populate('gifts')
+                .then((user) => {
+                    res.send(user);
+                }).catch(next);
+        }
     },
 
     post: {
@@ -46,7 +57,9 @@ module.exports = {
                     }
 
                     const token = utils.jwt.createToken({ id: user._id });
-                    res.cookie(config.authCookieName, token).send(user);
+                    res.cookie(config.authCookieName, token)
+                        .cookie("username", username)
+                        .send(user);
                 })
                 .catch(next);
         },
