@@ -7,6 +7,8 @@ function Navigation({ isLogged }) {
         {isLogged ?
             <ul>
                 <li><NavLink to="/gifts/create" activeClassName="active">Create Gift</NavLink></li>
+                <li><NavLink to="/gifts" activeClassName="active">All Gifts</NavLink></li>
+                <li><NavLink to="/my-gifts" activeClassName="active">My Gifts</NavLink></li>
                 <li><NavLink to="/profile" activeClassName="active">Profile</NavLink></li>
                 <li><Link to="/logout">Logout</Link></li>
             </ul>

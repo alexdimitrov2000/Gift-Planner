@@ -5,6 +5,7 @@ import Loader from 'react-loading';
 import Header from '../Header/Header';
 import Lights from '../Lights/Lights';
 import Footer from '../Footer/Footer';
+import AddGift from '../Gifts/AddGift/AddGift';
 import userService from '../../services/user-service';
 import auth from '../../utils/auth';
 
@@ -14,6 +15,8 @@ const Logout = React.lazy(() => import('../Logout/Logout'));
 const Register = React.lazy(() => import('../Register/Register'));
 const Profile = React.lazy(() => import('../Profile/Profile'));
 const CreateGift = React.lazy(() => import('../Gifts/CreateGift/CreateGift'));
+const AllGifts = React.lazy(() => import('../AllGifts/AllGifts'));
+const MyGifts = React.lazy(() => import('../MyGifts/MyGifts'));
 const ProtectedRoute = React.lazy(() => import('../ProtectedRoute/ProtectedRoute'));
 
 class App extends React.Component {
@@ -55,6 +58,9 @@ class App extends React.Component {
                 <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/logout" exact render={(props) => <Logout {...props} logout={this.logout} />} />
                 <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/profile" exact component={Profile} />
                 <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/gifts/create" exact component={CreateGift} />
+                <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/gifts" exact component={AllGifts} />
+                <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/my-gifts" exact component={MyGifts} />
+                <Route path="/gifts/addGiver/:id" exact component={AddGift} />
               </Suspense>
             </Switch>
           </div>
