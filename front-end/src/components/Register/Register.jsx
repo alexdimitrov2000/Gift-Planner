@@ -20,8 +20,6 @@ class Register extends React.Component {
                 uploadPreset: cloudinaryData.uploadPreset
             }, (error, result) => {
                 if (!error && result && result.event === "success") {
-                    console.log('Done! Here is the image info: ', result.info);
-                    
                     this.props.setProfilePicUrl(result.info.url);
                 }
             }),
@@ -33,7 +31,7 @@ class Register extends React.Component {
     usernameOnChangeHandler = this.props.controlChangeHandlerFactory('username');
     passwordOnChangeHandler = this.props.controlChangeHandlerFactory('password');
     confirmPasswordOnChangeHandler = this.props.controlChangeHandlerFactory('confirmPassword');
-    
+
     uploadImage = () => {
         this.state.cloudWidget.open();
 
@@ -44,8 +42,8 @@ class Register extends React.Component {
         event.preventDefault();
 
         this.props.runValidations()
-        .then(formData => console.log(formData))
-        .catch(err => console.error(err));
+            .then(formData => console.log(formData))
+            .catch(err => console.error(err));
 
         const errors = this.props.getFormErrors();
         if (!!errors) { return; }
@@ -54,7 +52,9 @@ class Register extends React.Component {
         userService.register(data).then(() => {
             this.props.history.push('/login');
         }).catch(err => {
-            this.setState({ serverError: err });
+            if (err === 'Username is already taken') {
+                this.setState({ serverError: err });
+            }
         });
     }
 

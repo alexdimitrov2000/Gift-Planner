@@ -7,10 +7,7 @@ function AddGift({ history, ...props }) {
     const userUsername = auth.getUsername();
     const giftId = props.match.params.id;
 
-    console.log(userUsername, giftId);
-
     userService.getByUsername(userUsername).then(user => {
-        console.log(user);
         giftService.addGiver(giftId, user).then(() => {
             history.push('/profile');
         })
