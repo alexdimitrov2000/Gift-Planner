@@ -23,3 +23,7 @@
 .welcome-banner .secondary-greet {
     font-size: 3em;
 }
+
+header {
+    padding-top: 1.5em;
+}
