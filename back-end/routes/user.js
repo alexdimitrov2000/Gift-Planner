@@ -11,7 +11,7 @@ router.post('/login', controllers.user.post.login);
 
 router.post('/logout', controllers.user.post.logout);
 
-router.put('/:id', controllers.user.put);
+router.put('/:username', controllers.user.put.changeProfilePicture);
 
 router.delete('/:id', controllers.user.delete);
 

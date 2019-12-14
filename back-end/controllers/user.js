@@ -12,7 +12,7 @@ module.exports = {
 
         getOne: (req, res, next) => {
             const username = req.params.username;
-            
+
             models.User.findOne({ username }).populate('gifts')
                 .then((user) => {
                     res.send(user);
@@ -77,12 +77,15 @@ module.exports = {
         }
     },
 
-    put: (req, res, next) => {
-        const id = req.params.id;
-        const { username, password, isAdmin } = req.body;
-        models.User.update({ _id: id }, { username, password, isAdmin })
-            .then((updatedUser) => res.send(updatedUser))
-            .catch(next)
+    put: {
+        changeProfilePicture: (req, res, next) => {
+            const username = req.params.username;
+            const profilePictureUrl = req.query.pictureUrl;
+
+            models.User.updateOne({ username }, { profilePictureUrl })
+                .then((updatedUser) => res.send(updatedUser))
+                .catch(next);
+        }
     },
 
     delete: (req, res, next) => {
