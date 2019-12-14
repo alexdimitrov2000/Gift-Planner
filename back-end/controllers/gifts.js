@@ -39,6 +39,18 @@ module.exports = {
             ]).then(([user, gift]) => {
                 res.send(gift);
             });
+        },
+        
+        removeGiver: (req, res, next) => {
+            const giftId = req.params.id;
+            const userId = req.body._id;
+
+            Promise.all([
+                models.User.updateOne({ _id: userId }, { $pull: { gifts: giftId } }),
+                models.Gift.updateOne({ _id: giftId }, { $pull: { givers: userId } })
+            ]).then(([user, gift]) => {
+                res.send(gift);
+            });
         }
     },
 

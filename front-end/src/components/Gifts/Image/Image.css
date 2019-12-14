@@ -33,13 +33,12 @@
     border-top-right-radius: 0.3em;
 }
 
-.media .add-btn {
+.media .add-btn,
+.media .remove-btn {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #34A65F;
-    border: 3px solid #34A65F;
     color: #FFF;
     opacity: 0;
     text-align: center;
@@ -47,8 +46,24 @@
     padding: 0.4em 0.5em;
 }
 
+.media .add-btn {
+    background-color: #34A65F;
+    border: 3px solid #34A65F;
+}
+
+.media .remove-btn {
+    background-color: #D8000C;
+    border: 3px solid #D8000C;
+    display: none;
+}
+
 .media .add-btn:hover {
     color: #34A65F;
+    background-color: #FFF;
+}
+
+.media .remove-btn:hover {
+    color: #D8000C;
     background-color: #FFF;
 }
 
@@ -66,7 +81,8 @@
     z-index: 2;
 }
 
-.media > span:hover .add-btn {
+.media > span:hover .add-btn,
+.media > span:hover .remove-btn {
     opacity: 1;
     z-index: 3;
 }
@@ -92,6 +108,7 @@
     transition: transform 0.2s ease-in;
 }
 
-.media > span .add-btn {
+.media > span .add-btn,
+.media > span .remove-btn {
     transition: all 0.2s ease-in;
 }

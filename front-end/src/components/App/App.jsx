@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import Lights from '../Lights/Lights';
 import Footer from '../Footer/Footer';
 import AddGift from '../Gifts/AddGift/AddGift';
+import RemovePlannedGift from '../Gifts/RemovePlannedGift/RemovePlannedGift';
 import userService from '../../services/user-service';
 import auth from '../../utils/auth';
 
@@ -58,9 +59,10 @@ class App extends React.Component {
                 <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/logout" exact render={(props) => <Logout {...props} logout={this.logout} />} />
                 <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/profile" exact component={Profile} />
                 <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/gifts/create" exact component={CreateGift} />
-                <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/gifts" exact component={AllGifts} />
+                <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/gifts/all" exact component={AllGifts} />
                 <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/my-gifts" exact component={MyGifts} />
-                <Route path="/gifts/addGiver/:id" exact component={AddGift} />
+                <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/gifts/addGiver/:id" exact component={AddGift} />
+                <ProtectedRoute redirectTo="/login" isLogged={isLogged} path="/gifts/removeGiver/:id" exact component={RemovePlannedGift} />
               </Suspense>
             </Switch>
           </div>

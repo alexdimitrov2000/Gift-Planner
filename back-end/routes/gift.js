@@ -8,6 +8,8 @@ router.post('/create', auth(), controllers.gifts.post.create);
 
 router.put('/addGiver/:id', auth(), controllers.gifts.put.addGiver);
 
+router.put('/removeGiver/:id', auth(), controllers.gifts.put.removeGiver);
+
 router.delete('/:id', auth(), controllers.gifts.delete);
 
 module.exports = router;

@@ -11,7 +11,7 @@ const Gifts = ({ limit, propGifts }) => {
 
     React.useEffect(() => {
         if (propGifts === undefined) {
-            giftService.load(null, limit).then(gifts => {
+            giftService.load(limit).then(gifts => {
                 setGifts(gifts);
             });
         }

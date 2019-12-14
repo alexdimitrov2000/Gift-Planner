@@ -22,7 +22,7 @@ const MyGifts = () => {
             </header>
             {myGifts && myGifts.length > 0 ?
                 <Gifts propGifts={myGifts} /> :
-                <h2 className="no-gifts-msg">No gifts. Check our <Link to="/gifts">suggestions</Link>.</h2>
+                <h2 className="no-gifts-msg">No gifts. Check our <Link to="/gifts/all">suggestions</Link>.</h2>
             }
         </div>
     </div>
