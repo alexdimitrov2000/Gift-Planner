@@ -1,0 +1,30 @@
+.my-gifts-page {
+    min-height: 43rem;
+}
+
+.my-gifts-page .gifts-section .gifts {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 3em;
+}
+
+.my-gifts-page .gifts-section .gifts .media > span:hover::before {
+    background: rgba(0,0,0,0);
+}
+
+.my-gifts-page .gifts-section .gifts .media > span .add-btn  {
+    display: none;
+}
+
+.my-gifts-page .no-gifts-msg {
+    color: #000;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.my-gifts-page .no-gifts-msg a {
+    color: #0F8A5F;
+}
+
+.my-gifts-page .no-gifts-msg a:hover {
+    text-decoration: underline;
+}
