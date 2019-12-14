@@ -31,13 +31,13 @@ module.exports = {
     put: {
         addGiver: (req, res, next) => {
             const giftId = req.params.id;
-            const userId = req.user._id;
+            const userId = req.body._id;
 
             Promise.all([
                 models.User.updateOne({ _id: userId }, { $push: { gifts: giftId } }),
                 models.Gift.updateOne({ _id: giftId }, { $push: { givers: userId } })
-            ]).then(() => {
-                res.redirect('/');
+            ]).then(([user, gift]) => {
+                res.send(gift);
             });
         }
     },

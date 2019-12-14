@@ -4,18 +4,26 @@
     position: relative;
 }
 
+.media span,
+.media img,
+.media a {
+    display: block;
+}
+
 .media::before {
     display: block;
     content: '';
     padding-top: 65.25%;
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
 }
 
-.media > a {
+.media > span {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
 }
 
-.media > a::before {
+.media > span::before {
     display: block;
     content: '';
     background: rgba(0,0,0,0.0);
@@ -25,15 +33,45 @@
     border-top-right-radius: 0.3em;
 }
 
-.media > a:hover {
+.media .add-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #34A65F;
+    border: 3px solid #34A65F;
+    color: #FFF;
+    opacity: 0;
+    text-align: center;
+    border-radius: 0.3em;
+    padding: 0.4em 0.5em;
+}
+
+.media .add-btn:hover {
+    color: #34A65F;
+    background-color: #FFF;
+}
+
+.media > span:hover {
     cursor: pointer;
 }
 
-.media > a:hover img {
+.media > span:hover img {
     position: relative;
+    z-index: 1;
 }
 
-.media > a:hover img {
+.media > span:hover::before {
+    background: rgba(0,0,0,0.8);
+    z-index: 2;
+}
+
+.media > span:hover .add-btn {
+    opacity: 1;
+    z-index: 3;
+}
+
+.media > span:hover img {
     transform: scale(1.2);
 }
 
@@ -45,6 +83,15 @@
     border-top-right-radius: 0.3em;
 }
 
-.media > a img {
+/* Transitions */
+.media > span::before {
+    transition: background 0.2s ease-in;
+}
+
+.media > span img {
     transition: transform 0.2s ease-in;
+}
+
+.media > span .add-btn {
+    transition: all 0.2s ease-in;
 }

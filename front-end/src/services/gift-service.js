@@ -12,6 +12,17 @@ const giftService = {
             },
             credentials: 'include',
         }).then(res => res.json());
+    },
+
+    addGiver: function(id, user) {
+        return fetch(`http://localhost:9999/api/gift/addGiver/${id}`, {
+            body: JSON.stringify(user),
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+        }).then(res => res.json());
     }
 };
 

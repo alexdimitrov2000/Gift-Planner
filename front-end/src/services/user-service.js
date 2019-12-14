@@ -25,6 +25,11 @@ const userService = {
             method: 'POST',
             credentials: 'include'
         }).then(res => res.text());
+    },
+
+    getByUsername: function(username) {
+        return fetch(`http://localhost:9999/api/user/${username}`)
+            .then(res => res.json());
     }
 };
 
