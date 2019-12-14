@@ -1,0 +1,8 @@
+.all-gifts-page {
+    min-height: 43rem;
+}
+
+.all-gifts-page .gifts-section .gifts {
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 3em;
+}
