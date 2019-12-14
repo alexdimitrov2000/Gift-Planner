@@ -1,12 +1,5 @@
 .gifts-section {
-    padding: 3em 0;
-    padding-top: 1.2em;
-}
-
-.gifts-section header > h2 {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
+    padding-bottom: 3em;
 }
 
 .gifts {
