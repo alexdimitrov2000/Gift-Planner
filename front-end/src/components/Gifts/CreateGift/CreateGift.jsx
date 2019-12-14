@@ -49,13 +49,13 @@ const CreateGift = ({ history }) => {
         }).then((data) => {
             giftService.create(data).then((gift) => {
                 history.push('/');
-            })
+            }).catch(err => setCredentialsError(err));
         }).catch(errors => {
             if (errors.name) { nameFormControl.setErrors(errors.name); }
             if (errors.description) { descriptionFormControl.setErrors(errors.description); }
             if (errors.imageUrl) { imageUrlFormControl.setErrors(errors.imageUrl); }
         });
-    }, [nameFormControl, imageUrlFormControl, descriptionFormControl]);
+    }, [nameFormControl, imageUrlFormControl, descriptionFormControl, history, setCredentialsError]);
 
     return <div className="create-gift-page">
         <div className="wrapper">
