@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import * as yup from 'yup';
-// import Gifts from '../Gifts';
 import './CreateGift.css';
 import '../../shared/styles/formStyles.css';
 import giftService from '../../../services/gift-service';
